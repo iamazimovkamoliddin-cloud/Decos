@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gifts.ru — Kirish</title>
+  <!-- Google Font (faqat dizayn uchun) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1216;           /* umumiy fon */
+      --panel:#11161d;        /* kartalar foni */
+      --muted:#7f8894;        /* ikkilamchi matn */
+      --text:#e8ecf2;         /* asosiy matn */
+      --brand:#ff4d4f;        /* aksent (gifts.ru ruhida qizg‘ish) */
+      --brand-2:#ff784f;      /* gradient ikkinchi rang */
+      --stroke:#222936;       /* chiziqlar */
+      --ok:#22c55e;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(80vw 80vh at 10% -20%, rgba(255,77,79,.18), transparent 60%),
+                  radial-gradient(60vw 60vh at 110% 110%, rgba(255,120,79,.15), transparent 60%),
+                  linear-gradient(180deg, #0b0d11, #0f1216 40%);
+    }
+
+    /* Wrapper */
+    .auth{
+      min-height:100dvh;
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      padding: clamp(16px, 2vw, 28px);
+    }
+
+    /* Brand tomoni (chap) */
+    .brand{
+      position:relative;
+      border:1px solid var(--stroke);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(255,77,79,.06), transparent 60%),
+        radial-gradient(800px 600px at 90% 90%, rgba(255,120,79,.05), transparent 60%),
+        linear-gradient(180deg, #0f131a, #0c1016);
+      border-radius: calc(var(--radius) + 8px);
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+      isolation:isolate;
+    }
+    .brand::before{
+      /* dekorativ gradient disk */
+      content:"";
+      position:absolute; inset:auto -12% -12% auto;
+      width:min(42vw,720px); aspect-ratio:1/1; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,77,79,.6), rgba(255,120,79,.35) 35%, transparent 60%);
+      filter: blur(30px); opacity:.28; z-index:-1;
+      transform: translate(10%,10%);
+    }
+
+    .brand-inner{ max-width: 820px; }
+    .logo{
+      display:flex; align-items:center; gap:12px;
+      margin-bottom: clamp(22px, 3vw, 40px);
+    }
+    .logo-badge{
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      display:grid; place-items:center; font-weight:800; color:white;
+      box-shadow: 0 8px 20px rgba(255,77,79,.35);
+    }
+    .logo-name{ font-weight:700; letter-spacing:.2px; }
+
+    .headline{
+      font-size: clamp(28px, 3.2vw, 46px);
+      line-height:1.12; font-weight:700; margin: 0 0 16px;
+    }
+    .subhead{ color:var(--muted); margin:0 0 28px; max-width: 60ch; }
+
+    .highlights{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; margin-top:24px;
+    }
+    .chip{
+      border:1px solid var(--stroke); color:#cfd6df; background:#0c1117cc;
+      border-radius:999px; padding:10px 14px; font-size:14px; white-space:nowrap;
+      display:flex; align-items:center; gap:8px;
+    }
+    .dot{ width:8px; height:8px; border-radius:50%; background:var(--brand); box-shadow:0 0 0 4px rgba(255,77,79,.18); }
+
+    /* Form tomoni (o‘ng) */
+    .panel{
+      align-self:center;
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, #0e1319, #0b1016);
+      border-radius: var(--radius);
+      padding: clamp(18px, 2.2vw, 28px);
+      box-shadow: var(--shadow);
+      width:min(520px, 100%);
+      justify-self:center;
+    }
+
+    .panel header{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom: 18px;
+    }
+    .panel header .title{ font-weight:600; font-size: clamp(18px, 1.6vw, 22px); }
+    .panel header .hint{ color:var(--muted); font-size:14px; }
+
+    form{ display:grid; gap:14px; }
+    label{ font-size:14px; color:#cfd6df; display:block; margin-bottom:8px; }
+
+    .field{ position:relative; }
+    .input{
+      width:100%;
+      background:#0a0f15; color:var(--text);
+      border:1px solid var(--stroke);
+      border-radius:14px;
+      padding:14px 16px;
+      outline:none; font-size:15px;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .input:focus{
+      border-color: rgba(255,77,79,.55);
+      box-shadow: 0 0 0 6px rgba(255,77,79,.12);
+    }
+    .input:invalid{ border-color:#3a4150; }
+
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .checkbox{ display:flex; align-items:center; gap:10px; color:#cfd6df; font-size:14px; }
+    .checkbox input{ width:16px; height:16px; accent-color: var(--brand); }
+
+    .link{ color:#ffd1d1; text-decoration:none; font-size:14px; }
+    .link:hover{ text-decoration:underline; }
+
+    .btn{
+      border:none; cursor:pointer; width:100%;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:white; font-weight:600;
+      border-radius:14px; padding:14px 18px; font-size:15px;
+      box-shadow: 0 10px 24px rgba(255,77,79,.35);
+      transition: transform .06s ease-in-out, box-shadow .2s;
+    }
+    .btn:active{ transform: translateY(1px); box-shadow: 0 6px 16px rgba(255,77,79,.28); }
+
+    .divider{ display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; color:var(--muted); font-size:13px; margin:6px 0 2px; }
+    .divider::before,.divider::after{ content:""; height:1px; background:var(--stroke); }
+
+    .providers{ display:grid; gap:10px; margin-top:8px; }
+    .ghost{
+      width:100%;
+      background:#0a0f15; color:#cfd6df; border:1px solid var(--stroke);
+      border-radius:14px; padding:12px 14px; font-weight:500; cursor:pointer;
+    }
+    .ghost:hover{ border-color:#374357; }
+
+    .meta{ color:var(--muted); font-size:13px; margin-top:14px; }
+
+    /* Responsiv */
+    @media (max-width: 1040px){
+      .auth{ grid-template-columns: 1fr; }
+      .brand{ min-height: 40vh; }
+    }
+    @media (max-width: 560px){
+      .highlights{ grid-template-columns: 1fr 1fr; }
+      .panel{ padding:16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth">
+    <!-- Chap: brend / kontekst -->
+    <section class="brand">
+      <div class="brand-inner">
+        <div class="logo" aria-label="Gifts.ru logotipi">
+          <div class="logo-badge" aria-hidden="true">D</div>
+          <div class="logo-name">Dekos<span style="color:var(--brand)">.ru</span> B2B</div>
+        </div>
+        <h1 class="headline">Korporativ sovg‘alar platformasiga xush kelibsiz</h1>
+        <p class="subhead">Kirish orqali buyurtmalar, kataloglar va hamkorlar uchun maxsus narxlarga kirish oling. Barcha jarayonlar — bitta hisobda.</p>
+
+        <div class="highlights" aria-hidden="true">
+          <div class="chip"><span class="dot"></span> Tez-bajariladigan buyurtma</div>
+          <div class="chip"><span class="dot"></span> Shaxsiy katalog</div>
+          <div class="chip"><span class="dot"></span> Hisob-faktura & aktlar</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- O‘ng: kirish paneli -->
+    <section class="panel" aria-label="Kirish paneli">
+      <header>
+        <div class="title">Hisobga kirish</div>
+        <div class="hint">Yangi foydalanuvchi? <a class="link" href="#">Ro‘yxatdan o‘ting</a></div>
+      </header>
+
+      <form novalidate action="#" method="post">
+        <div class="field">
+          <label for="login">Email yoki telefon</label>
+          <input id="login" name="login" class="input" type="text" placeholder="example@company.com" required>
+        </div>
+        <div class="field">
+          <label for="password">Parol</label>
+          <input id="password" name="password" class="input" type="password" placeholder="********" required>
+        </div>
+
+        <div class="row">
+          <label class="checkbox"><input type="checkbox" name="remember"> Meni eslab qol</label>
+          <a class="link" href="#">Parolni unutdingizmi?</a>
+        </div>
+
+        <button type="submit" class="btn">Kirish</button>
+
+        <div class="divider">yoki</div>
+
+        <div class="providers">
+          <button class="ghost" type="button">S–sohib hisob bilan kirish</button>
+          <button class="ghost" type="button">Yandex ID bilan kirish</button>
+        </div>
+
+        <p class="meta">Kirish tugmasini bosish orqali siz <a class="link" href="#">foydalanish shartlari</a> va <a class="link" href="#">maxfiylik siyosati</a>ga rozilik bildirasiz.</p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
